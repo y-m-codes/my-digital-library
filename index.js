@@ -18,20 +18,20 @@ addBookToLibrary("Yellowface", "RF Kuang", "2023", "unread");
 addBookToLibrary("Small Boat", "Delacroix", "2023", "unread");
 addBookToLibrary("The Stranger", "Albert Camus", "1942", "unread")
 
-// console.log("myLibrary", myLibrary);
-// console.log("myLibrary[0].title", myLibrary[0].title)
-// console.log("myLibrary[0].author", myLibrary[0].author)
-// console.log("myLibrary[0].yearPublished", myLibrary[0].yearPublished)
-// console.log("myLibrary[0].read", myLibrary[0].read)
-
 const bookList = document.querySelector("#book-list");
 const newBookBtn = document.querySelector("#new-book");
-
-// const listedBook = document.querySelector("#book-one");
-// listedBook.textContent = myLibrary[0].title;
 
 for (i = 0; i < myLibrary.length; i++) {
   const latestBook = document.createElement("p");
   latestBook.textContent = myLibrary[i].title;
   bookList.appendChild(latestBook)
 }
+
+function createNewBook(title) {
+  const newBook = document.createElement("p");
+  newBook.textContent = title;
+  bookList.appendChild(newBook)
+}
+
+const newBookBtn = document.querySelector("#btn-new-book");
+newBookBtn.addEventListener("click", createNewBook)
