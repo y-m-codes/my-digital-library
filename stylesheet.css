@@ -2,6 +2,7 @@
 border-style: solid;
 border-color: red;
 border-width: 1px;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #wrapper {
@@ -9,4 +10,18 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+}
+
+.latest-book-tile {
+border-style: solid;
+border-color: blue;
+border-width: 1px;
+}
+
+.header-author-year {
+font-weight: normal;
+}
+
+.p-pages-read {
+
 }
