@@ -55,7 +55,7 @@ function createNewBook() {
   let newBook = new Book(title, author, yearPublished, pages, readStatus);
   myLibrary.push(newBook);
   clearBookList();
-  renderLibrary()
+  renderLibrary();
 }
 
 function getBookInfo() {
