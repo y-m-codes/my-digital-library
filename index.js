@@ -1,16 +1,16 @@
 const myLibrary = [];
 
-function Book(title, author, yearPublished, pages, read) {
+function Book(title, author, yearPublished, pages, readStatus) {
   this.title = title;
   this.author = author;
   this.yearPublished = yearPublished;
   this.pages = pages;
-  this.read = read;
+  this.readStatus = readStatus;
   this.id = crypto.randomUUID();
 }
 
-function addBookToLibrary(title, author, yearPublished, pages, read) {
-  let newBook = new Book(title, author, yearPublished, pages, read);
+function addBookToLibrary(title, author, yearPublished, pages, readStatus) {
+  let newBook = new Book(title, author, yearPublished, pages, readStatus);
   myLibrary.push(newBook);
 }
 
@@ -36,38 +36,41 @@ function renderLibrary() {
   const latestBookAuthorYear = document.createElement("h3");
   latestBookAuthorYear.classList.add("header-author-year");
 
-  const latestBookPagesAndRead = document.createElement("p");
-  latestBookPagesAndRead.classList.add("p-pages-read");
+  const latestBookPagesAndReadStatus = document.createElement("p");
+  latestBookPagesAndReadStatus.classList.add("p-pages-read-status");
 
   latestBookTitle.textContent = myLibrary[i].title;
   latestBookAuthorYear.textContent = `${myLibrary[i].author}, ${myLibrary[i].yearPublished}`;
-  latestBookPagesAndRead.textContent = `${myLibrary[i].pages} pages, ${myLibrary[i].read}`;
+  latestBookPagesAndReadStatus.textContent = `${myLibrary[i].pages} pages, ${myLibrary[i].readStatus}`;
 
   latestBookTile.appendChild(latestBookTitle);
   latestBookTile.appendChild(latestBookAuthorYear);
-  latestBookTile.appendChild(latestBookPagesAndRead);
+  latestBookTile.appendChild(latestBookPagesAndReadStatus);
   }
 }
 
 function createNewBook() {
-  const {title, author, yearPublished, pages, read} = getBookInfo();
+  const {title, author, yearPublished, pages, readStatus} = getBookInfo();
 
-  let newBook = new Book(title, author, yearPublished, pages, read);
+  let newBook = new Book(title, author, yearPublished, pages, readStatus);
   myLibrary.push(newBook);
   clearBookList();
   renderLibrary()
 }
 
 function getBookInfo() {
-  let title = prompt("What's the book's title?");
-  let author = prompt("Who wrote it?");
-  let yearPublished = prompt("When was it published?");
-  let pages = prompt("How many pages in this book?");
-  let read = prompt("Have you read it?");
+  let title = document.getElementById('new-book-title').value;
+  let author = document.getElementById('new-book-author').value;
+  let yearPublished = document.getElementById('new-book-publishing-year').value;
+  let pages = document.getElementById('new-book-pages').value;
+  let readStatus = document.getElementById('read-status').value;
 
-  // return new Book(title, author, yearPublished, pages, read);
-  return {title: title, author: author, yearPublished: yearPublished, pages: pages, read: read}
+  return {title: title, author: author, yearPublished: yearPublished, pages: pages, readStatus: readStatus}
 }
 
-const newBookBtn = document.querySelector("#btn-new-book");
-newBookBtn.addEventListener("click", createNewBook);
+const addNewBookForm = document.querySelector("#form-add-new-book");
+addNewBookForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  createNewBook();
+  addNewBookForm.reset()
+});
