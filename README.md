@@ -2,9 +2,8 @@
 
 To do:
 
-- "Add new book" form should not accept blank entries.
 
-- If any field is entered as “unknown”, record it as “Unknown” for consistency.
+- If Author, Year Published, or Pages fields are blank or entered as “unknown”, record them as “Unknown” for consistency.
 
 - add "remove book" button
 
