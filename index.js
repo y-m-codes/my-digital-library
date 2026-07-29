@@ -71,6 +71,22 @@ function getBookInfo() {
 const addNewBookForm = document.querySelector("#form-add-new-book");
 addNewBookForm.addEventListener('submit', function (event) {
   event.preventDefault();
+
+  let newBookAuthor = document.getElementById('new-book-author');
+  if (newBookAuthor.value.trim() === '') {
+    newBookAuthor.value = 'Unknown';
+  };
+
+  let newBookPublishingYear = document.getElementById('new-book-publishing-year');
+  if (newBookPublishingYear.value.trim() === '') {
+    newBookPublishingYear.value = 'Unknown';
+  };
+
+  let newBookPages = document.getElementById('new-book-pages');
+  if (newBookPages.value.trim() === '') {
+    newBookPages.value = 'Unknown';
+  };
+
   createNewBook();
   addNewBookForm.reset()
 });

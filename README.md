@@ -2,9 +2,6 @@
 
 To do:
 
-
-- If Author, Year Published, or Pages fields are blank or entered as “unknown”, record them as “Unknown” for consistency.
-
 - add "remove book" button
 
 - make the "read" info updatable after the new book card is created, so users
