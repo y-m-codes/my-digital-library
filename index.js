@@ -30,6 +30,8 @@ function renderLibrary() {
   for (i = 0; i < myLibrary.length; i++) {
   const latestBookTile = document.createElement("div");
   latestBookTile.classList.add("latest-book-tile");
+  let bookTitle = myLibrary[i].title;
+  latestBookTile.id = bookTitle.replace(" ", "");
   bookList.appendChild(latestBookTile);
 
   const latestBookTitle = document.createElement("h1");
@@ -49,27 +51,8 @@ function renderLibrary() {
   }
 }
 
-function createNewBook() {
-  const {title, author, yearPublished, pages, readStatus} = getBookInfo();
-
-  let newBook = new Book(title, author, yearPublished, pages, readStatus);
-  myLibrary.push(newBook);
-  clearBookList();
-  renderLibrary();
-}
-
-function getBookInfo() {
-  let title = document.getElementById('new-book-title').value;
-  let author = document.getElementById('new-book-author').value;
-  let yearPublished = document.getElementById('new-book-publishing-year').value;
-  let pages = document.getElementById('new-book-pages').value;
-  let readStatus = document.getElementById('read-status').value;
-
-  return {title: title, author: author, yearPublished: yearPublished, pages: pages, readStatus: readStatus}
-}
-
 const addNewBookForm = document.querySelector("#form-add-new-book");
-addNewBookForm.addEventListener('submit', function (event) {
+addNewBookForm.addEventListener('submit', function(event) {
   event.preventDefault();
 
   let newBookAuthor = document.getElementById('new-book-author');
@@ -90,3 +73,38 @@ addNewBookForm.addEventListener('submit', function (event) {
   createNewBook();
   addNewBookForm.reset()
 });
+
+function getBookInfo() {
+  let title = document.getElementById('new-book-title').value;
+  let author = document.getElementById('new-book-author').value;
+  let yearPublished = document.getElementById('new-book-publishing-year').value;
+  let pages = document.getElementById('new-book-pages').value;
+  let readStatus = document.getElementById('read-status').value;
+
+  return {title: title, author: author, yearPublished: yearPublished, pages: pages, readStatus: readStatus}
+}
+
+function createNewBook() {
+  const {title, author, yearPublished, pages, readStatus} = getBookInfo();
+
+  let newBook = new Book(title, author, yearPublished, pages, readStatus);
+  myLibrary.push(newBook);
+  clearBookList();
+  renderLibrary();
+}
+
+// test: try to delete just "The Stranger"
+let deleteTheStrangerBtn = document.createElement("button");
+deleteTheStrangerBtn.textContent = "Delete"
+deleteTheStrangerBtn.classList.add("btn-delete-the-stranger");
+deleteTheStrangerBtn.addEventListener("click", deleteBook);
+const theStrangerTile = document.querySelector("#TheStranger");
+theStrangerTile.appendChild(deleteTheStrangerBtn);
+
+function deleteBook(event) {
+let clickedElement = event.target.parentElement;
+clickedElement.remove();
+
+// console.log("event.target", event.target);
+// console.log("event.target.parentElement", event.target.parentElement);
+}

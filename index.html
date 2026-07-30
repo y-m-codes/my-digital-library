@@ -31,10 +31,10 @@
         <input type="text" id="new-book-author">
 
         <label for="publishing-year">Publishing year:</label>
-        <input type="text" id="new-book-publishing-year" pattern="\d{4}">
+        <input type="text" id="new-book-publishing-year" pattern="^\d{1,4}$">
 
         <label for="pages">Pages:</label>
-        <input type="text" id="new-book-pages" pattern="\d">
+        <input type="text" id="new-book-pages" pattern="\d+">
 
         <label for="read">Read:</label>
         <select name="read" id="read-status">
