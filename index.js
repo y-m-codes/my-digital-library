@@ -53,7 +53,6 @@ function renderLibrary() {
     })
 
     bookDiv.appendChild(deleteBookBtn)
-
   }
 }
 
@@ -106,18 +105,3 @@ function deleteBook(id) {
   clearBookList();
   renderLibrary()
 }
-
-// test: try to delete just "The Stranger"
-// let deleteTheStrangerBtn = document.createElement("button");
-// deleteTheStrangerBtn.textContent = "Delete"
-// deleteTheStrangerBtn.classList.add("btn-delete-the-stranger");
-// deleteTheStrangerBtn.addEventListener("click", deleteBook);
-// const theStrangerTile = document.querySelector("#TheStranger");
-// theStrangerTile.appendChild(deleteTheStrangerBtn);
-
-// function deleteBook(event) {
-// let clickedElement = event.target.parentElement;
-// clickedElement.remove();
-
-// console.log("event.target", event.target);
-// console.log("event.target.parentElement", event.target.parentElement);
