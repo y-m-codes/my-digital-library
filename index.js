@@ -75,8 +75,6 @@ function renderLibrary() {
     else if (selectedValue === UNREAD) {
       book.readStatus = UNREAD
     }
-
-    console.log(book.readStatus)
     });
 
     bookDiv.appendChild(dropdown);
