@@ -20,7 +20,12 @@ function addBook(title, author, year, pages, readStatus) {
 addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", UNREAD);
 addBook("Yellowface", "RF Kuang", "2023", "500", UNREAD);
 addBook("Small Boat", "Vincent Delacroix", "2023", "700", UNREAD);
-addBook("The Stranger", "Albert Camus", "1942", "1000", UNREAD)
+addBook("The Stranger", "Albert Camus", "1942", "1000", UNREAD);
+addBook("A Tale of Two Cities", "Charles Dickens", "1859", "2000", UNREAD);
+addBook("Harry Potter and the Philosopher's Stone", "J. K. Rowling", "1997", "1300", UNREAD);
+addBook("And Then There Were None", "Agatha Christie", "1939", "1500", UNREAD);
+addBook("Dream of the Red Chamber", "Cao Xueqin", "1791", "10000", UNREAD);
+addBook("The Murder of Roger Ackroyd", "Agatha Christie", "1926", "800", UNREAD);
 
 const bookList = document.querySelector("#book-list");
 renderLibrary(myLibrary, bookList)
@@ -35,7 +40,7 @@ function renderLibrary() {
     bookDiv.classList.add("book");
     bookList.appendChild(bookDiv);
 
-    const bookTitle = document.createElement("h1");
+    const bookTitle = document.createElement("h2");
     const subtitle = document.createElement("h3");
     subtitle.classList.add("subtitle");
 
