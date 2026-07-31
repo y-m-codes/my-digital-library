@@ -1,5 +1,8 @@
 const myLibrary = [];
 
+const READ = "read";
+const UNREAD = "unread"
+
 function Book(title, author, year, pages, readStatus) {
   this.title = title;
   this.author = author;
@@ -14,10 +17,10 @@ function addBook(title, author, year, pages, readStatus) {
   myLibrary.push(newBook);
 }
 
-addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", "read");
-addBook("Yellowface", "RF Kuang", "2023", "500", "unread");
-addBook("Small Boat", "Vincent Delacroix", "2023", "700", "unread");
-addBook("The Stranger", "Albert Camus", "1942", "1000", "unread")
+addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", UNREAD);
+addBook("Yellowface", "RF Kuang", "2023", "500", UNREAD);
+addBook("Small Boat", "Vincent Delacroix", "2023", "700", UNREAD);
+addBook("The Stranger", "Albert Camus", "1942", "1000", UNREAD)
 
 const bookList = document.querySelector("#book-list");
 renderLibrary(myLibrary, bookList)
@@ -36,22 +39,52 @@ function renderLibrary() {
     const subtitle = document.createElement("h3");
     subtitle.classList.add("subtitle");
 
-    const details = document.createElement("p");
-    details.classList.add("details");
+    const bookPages = document.createElement("p");
+    bookPages.classList.add("pages");
 
     bookTitle.textContent = book.title;
     subtitle.textContent = `${book.author}, ${book.year}`;
-    details.textContent = `${book.pages} pages, ${book.readStatus}`;
+    bookPages.textContent = `${book.pages} pages`;
 
     bookDiv.appendChild(bookTitle);
     bookDiv.appendChild(subtitle);
-    bookDiv.appendChild(details);
+    bookDiv.appendChild(bookPages);
+
+    const readStatusOptions = [
+      { value: READ, text: "Read" },
+      { value: UNREAD, text: "Unread" },
+    ];
+
+    const dropdown = document.createElement("select");
+    dropdown.id = "read-status";
+
+    readStatusOptions.forEach(readSelection => {
+    const option = document.createElement("option");
+    option.value = readSelection.value;
+    option.textContent = readSelection.text;
+    dropdown.appendChild(option);
+    });
+
+    dropdown.value = UNREAD;
+
+    dropdown.addEventListener("change", (event) => {
+    const selectedValue = event.target.value;
+    if (selectedValue === READ) {
+      book.readStatus = READ
+    }
+    else if (selectedValue === UNREAD) {
+      book.readStatus = UNREAD
+    }
+
+    console.log(book.readStatus)
+    });
+
+    bookDiv.appendChild(dropdown);
 
     const deleteBookBtn = Object.assign(document.createElement('button'), {
       textContent: 'Delete',
       onclick: () => deleteBook(book.id)
-    })
-
+    });
     bookDiv.appendChild(deleteBookBtn)
   }
 }
@@ -104,4 +137,4 @@ function deleteBook(id) {
   myLibrary.splice(index, 1);
   clearBookList();
   renderLibrary()
-}
+};
