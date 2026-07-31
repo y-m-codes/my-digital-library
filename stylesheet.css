@@ -36,3 +36,13 @@ background-color: blueviolet;
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+#new-book-div {
+  display: flex;
+  position: fixed;
+  bottom: 10px;
+  margin: 0 auto;
+  width: 90%;
+  z-index: 1000; /* Keeps it on top of other content */
+  justify-content: center;
+}
