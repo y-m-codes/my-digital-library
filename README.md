@@ -1,16 +1,13 @@
 # TOP-JS-library
 
 To do:
-
 - filter by read status
 - filter or search by author
 
 - search by title
 
-- sort by author (last name, first name)
 - sort by date added
 - sort by date read
-- sort by publication year
 
 - bulk delete
 - bulk mark as read
