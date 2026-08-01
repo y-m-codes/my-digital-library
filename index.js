@@ -17,7 +17,7 @@ function addBook(title, author, year, pages, readStatus) {
   myLibrary.push(newBook);
 }
 
-addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", UNREAD);
+addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", READ);
 addBook("Yellowface", "RF Kuang", "2023", "500", UNREAD);
 addBook("Small Boat", "Vincent Delacroix", "2023", "700", UNREAD);
 addBook("The Stranger", "Albert Camus", "1942", "1000", UNREAD);
@@ -56,8 +56,8 @@ function renderLibrary(library) {
     bookDiv.appendChild(bookPages);
 
     const readStatusOptions = [
-      { value: READ, text: "Read" },
       { value: UNREAD, text: "Unread" },
+      { value: READ, text: "Read" },
     ];
 
     const dropdown = document.createElement("select");
@@ -70,7 +70,7 @@ function renderLibrary(library) {
     dropdown.appendChild(option);
     });
 
-    dropdown.value = UNREAD;
+    // dropdown.value = UNREAD;
 
     dropdown.addEventListener("change", (event) => {
     const selectedValue = event.target.value;
@@ -169,16 +169,6 @@ sortBy.addEventListener("change", (event) => {
 
 // filter by read status, working area
 
-// function filterByRead() {
-//   let readBooks = myLibrary.filter((book) => book.readStatus === READ);
-//   return readBooks
-// };
-
-// function filterByUnread() {
-//   let unreadBooks = myLibrary.filter((book) => book.readStatus === UNREAD);
-//   return unreadBooks
-// };
-
 const readBooks = function() {
   return myLibrary.filter((book) => book.readStatus === READ)
 }
@@ -187,13 +177,20 @@ const unreadBooks = function() {
   return myLibrary.filter((book) => book.readStatus === UNREAD)
 }
 
-const noFilterBtn = document.querySelector("#all-btn");
+const noFilterBtn = document.querySelector("#no-filter-btn");
+noFilterBtn.addEventListener("click", () => {
+  clearBookList();
+  renderLibrary(myLibrary)
+})
 
 const readBtn = document.querySelector("#read-btn");
 readBtn.addEventListener("click", () => {
-  debugger
   clearBookList();
   renderLibrary(readBooks())
 })
 
 const unreadBtn = document.querySelector("#unread-btn");
+unreadBtn.addEventListener("click", () => {
+  clearBookList();
+  renderLibrary(unreadBooks())
+})
