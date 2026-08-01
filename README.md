@@ -1,9 +1,7 @@
 # TOP-JS-library
 
 To do:
-- filter by read status
-- filter or search by author
-
+- search by author
 - search by title
 
 - sort by date added
@@ -19,5 +17,7 @@ Decide how to display "expanded" version.
 (inefficient), render just the latest book.
 
 - #new-book-div should be opaque so you can't see the content behind it.
+
+- note that currently you can sort then filter, but you cannot filter then sort.
 
 - separate code into MVC structure if possible? (for readability).

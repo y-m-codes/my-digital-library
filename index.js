@@ -167,8 +167,6 @@ sortBy.addEventListener("change", (event) => {
   }
 );
 
-// filter by read status, working area
-
 const readBooks = function() {
   return myLibrary.filter((book) => book.readStatus === READ)
 }
