@@ -34,8 +34,8 @@ function clearBookList() {
   bookList.replaceChildren()
 }
 
-function renderLibrary() {
-  for (const book of myLibrary) {
+function renderLibrary(library) {
+  for (const book of library) {
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
     bookList.appendChild(bookDiv);
@@ -131,7 +131,7 @@ function createNewBook() {
   let newBook = new Book(title, author, year, pages, readStatus);
   myLibrary.push(newBook);
   clearBookList();
-  renderLibrary();
+  renderLibrary(myLibrary);
 }
 
 function deleteBook(id) {
@@ -139,7 +139,7 @@ function deleteBook(id) {
 
   myLibrary.splice(index, 1);
   clearBookList();
-  renderLibrary()
+  renderLibrary(myLibrary)
 };
 
 function sortByTitle() {
@@ -157,12 +157,43 @@ sortBy.addEventListener("change", (event) => {
     if (selectedValue === "title") {
       sortByTitle();
       clearBookList();
-      renderLibrary()
+      renderLibrary(myLibrary)
     }
     else if (selectedValue === "year") {
       sortByYear();
       clearBookList();
-      renderLibrary()
+      renderLibrary(myLibrary)
     }
   }
 );
+
+// filter by read status, working area
+
+// function filterByRead() {
+//   let readBooks = myLibrary.filter((book) => book.readStatus === READ);
+//   return readBooks
+// };
+
+// function filterByUnread() {
+//   let unreadBooks = myLibrary.filter((book) => book.readStatus === UNREAD);
+//   return unreadBooks
+// };
+
+const readBooks = function() {
+  return myLibrary.filter((book) => book.readStatus === READ)
+}
+
+const unreadBooks = function() {
+  return myLibrary.filter((book) => book.readStatus === UNREAD)
+}
+
+const noFilterBtn = document.querySelector("#all-btn");
+
+const readBtn = document.querySelector("#read-btn");
+readBtn.addEventListener("click", () => {
+  debugger
+  clearBookList();
+  renderLibrary(readBooks())
+})
+
+const unreadBtn = document.querySelector("#unread-btn");

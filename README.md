@@ -18,4 +18,6 @@ Decide how to display "expanded" version.
 - instead of re-rendering entire library each time a new book is added
 (inefficient), render just the latest book.
 
+- #new-book-div should be opaque so you can't see the content behind it.
+
 - separate code into MVC structure if possible? (for readability).

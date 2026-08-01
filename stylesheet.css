@@ -50,5 +50,10 @@ background-color: blueviolet;
 #toolbar {
   display: flex;
   width: 95%;
-  justify-content: right;
+  justify-content: center;
+  gap: 10px 100px;
+}
+
+#wrapper {
+  gap: 30px;
 }

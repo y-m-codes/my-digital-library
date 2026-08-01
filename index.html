@@ -15,15 +15,26 @@
     </div>
 
     <div id="toolbar">
-      <label for="sort-by">Sort by:</label>
+      <div id="search">
+      </div>
 
-      <select name="sort" id="sort-by">
-        <option value="" selected>--Please choose an option--</option>
-        <option value="title">Title</option>
-        <option value="year">Year</option>
-        <!-- <option value="date-added">Date Added</option> -->
-        <!-- <option value="date-read">Date Read</option> -->
-      </select>
+      <div id="read-status">
+        <button type="button" id="all-btn">All</button>
+        <button type="button" id="read-btn">Read</button>
+        <button type="button" id="unread-btn">Unread</button>
+      </div>
+
+      <div id="sort-by-div">
+        <label for="sort-by">Sort by:</label>
+
+        <select name="sort" id="sort-by">
+          <option value="" selected>--Please choose an option--</option>
+          <option value="title">Title</option>
+          <option value="year">Year</option>
+          <!-- <option value="date-added">Date Added</option> -->
+          <!-- <option value="date-read">Date Read</option> -->
+        </select>
+      </div>
     </div>
 
     <div id="book-list">
