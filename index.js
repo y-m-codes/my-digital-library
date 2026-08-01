@@ -28,7 +28,7 @@ addBook("Dream of the Red Chamber", "Cao Xueqin", "1791", "10000", UNREAD);
 addBook("The Murder of Roger Ackroyd", "Agatha Christie", "1926", "800", UNREAD);
 
 const bookList = document.querySelector("#book-list");
-renderLibrary(myLibrary, bookList)
+renderLibrary(myLibrary)
 
 function clearBookList() {
   bookList.replaceChildren()
@@ -70,7 +70,7 @@ function renderLibrary(library) {
     dropdown.appendChild(option);
     });
 
-    // dropdown.value = UNREAD;
+    dropdown.value = book.readStatus;
 
     dropdown.addEventListener("change", (event) => {
     const selectedValue = event.target.value;
