@@ -46,3 +46,9 @@ background-color: blueviolet;
   z-index: 1000; /* Keeps it on top of other content */
   justify-content: center;
 }
+
+#toolbar {
+  display: flex;
+  width: 95%;
+  justify-content: right;
+}

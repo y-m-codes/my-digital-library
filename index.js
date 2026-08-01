@@ -141,3 +141,29 @@ function deleteBook(id) {
   clearBookList();
   renderLibrary()
 };
+
+console.log("myLibrary", myLibrary); // just to check the sorting works!
+
+// sort by title working area
+function sortByTitle() {
+  myLibrary.sort((a, b) => a.title.localeCompare(b.title, "en",
+    { ignorePunctuation: true }));
+}
+
+const sortBy = document.querySelector("#sort-by");
+sortBy.addEventListener("change", (event) => {
+  const selectedValue = event.target.value;
+    if (selectedValue === "title") {
+      sortByTitle();
+      clearBookList();
+      renderLibrary()
+    }
+    // else if (selectedValue === UNREAD) {
+    //   book.readStatus = UNREAD
+    // }
+    });
+
+
+// sort by year working area
+// myLibrary.sort((a, b) => a.year - b.year);
+// console.log("myLibrary sorted by year", myLibrary);
