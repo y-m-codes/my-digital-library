@@ -1,12 +1,6 @@
 # TOP-JS-library
 
 To do:
-- search by author
-- search by title
-
-- sort by date added
-- sort by date read
-
 - bulk delete
 - bulk mark as read
 
@@ -18,6 +12,9 @@ Decide how to display "expanded" version.
 
 - #new-book-div should be opaque so you can't see the content behind it.
 
+- separate code into MVC structure wherever possible?, for readability.
+
 - note that currently you can sort then filter, but you cannot filter then sort.
 
-- separate code into MVC structure if possible? (for readability).
+- sort by date added
+- sort by date read

@@ -196,7 +196,6 @@ sortBy.addEventListener("change", (event) => {
 );
 
 // "search by author" & "title" partial match, working area
-const searchDiv = document.querySelector("#search-div");
 const searchBar = document.querySelector("#site-search");
 const searchBtn = document.querySelector("#search-btn");
 
