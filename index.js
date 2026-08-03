@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 const READ = "read";
 const UNREAD = "unread";
@@ -21,9 +21,9 @@ function addBook(title, author, year, pages, readStatus, selected) {
   myLibrary.push(newBook);
 }
 
-addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", READ, SELECTED);
-addBook("Yellowface", "RF Kuang", "2023", "500", UNREAD, SELECTED);
-addBook("Small Boat", "Vincent Delacroix", "2023", "700", READ, SELECTED);
+addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", READ, UNSELECTED);
+addBook("Yellowface", "RF Kuang", "2023", "500", UNREAD, UNSELECTED);
+addBook("Small Boat", "Vincent Delacroix", "2023", "700", READ, UNSELECTED);
 addBook("The Stranger", "Albert Camus", "1942", "1000", UNREAD, UNSELECTED);
 addBook("A Tale of Two Cities", "Charles Dickens", "1859", "2000", READ, UNSELECTED);
 addBook("Harry Potter and the Philosopher's Stone", "J. K. Rowling", "1997", "1300", UNREAD, UNSELECTED);
@@ -68,10 +68,10 @@ function renderLibrary(library) {
     dropdown.name = "read-status";
 
     readStatusOptions.forEach(readSelection => {
-    const option = document.createElement("option");
-    option.value = readSelection.value;
-    option.textContent = readSelection.text;
-    dropdown.appendChild(option);
+      const option = document.createElement("option");
+      option.value = readSelection.value;
+      option.textContent = readSelection.text;
+      dropdown.appendChild(option);
     });
 
     dropdown.value = book.readStatus;
@@ -92,7 +92,22 @@ function renderLibrary(library) {
       textContent: 'Delete',
       onclick: () => deleteBook(book.id)
     });
-    bookDiv.appendChild(deleteBookBtn)
+    bookDiv.appendChild(deleteBookBtn);
+
+    const checkbox = document.createElement("input");
+    checkbox.type = 'checkbox';
+    checkbox.name = 'selected';
+
+    checkbox.addEventListener("change", (event) => {
+    if (checkbox.checked) {
+      book.selected = SELECTED
+    }
+    else {
+      book.selected = UNSELECTED
+    }
+    });
+
+    bookDiv.appendChild(checkbox);
   }
 }
 
@@ -226,5 +241,25 @@ function search(query, library) {
 
 function deleteBooks(library) {
   let newLibrary = library.filter((book) => book.selected === UNSELECTED);
-  return newLibrary
+  myLibrary = newLibrary;
+  return myLibrary
 }
+
+const bulkAction = document.querySelector("#bulk-action");
+bulkAction.addEventListener("change", (event) => {
+  const selectedValue = event.target.value;
+    if (selectedValue === "delete") {
+      clearBookList();
+      renderLibrary(deleteBooks(myLibrary))
+    }
+    // else if (selectedValue === "mark-read") {
+    //   sortByYear();
+    //   clearBookList();
+    //   renderLibrary(myLibrary)
+    // }
+    // else if (selectedValue === "mark-unread") {
+    //   sortByYear();
+    //   clearBookList();
+    //   renderLibrary(myLibrary)
+    // }
+})

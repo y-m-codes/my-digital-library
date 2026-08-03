@@ -1,7 +1,6 @@
 # TOP-JS-library
 
 To do:
-- bulk delete
 - bulk mark as read
 
 - search bar: when you clear your search query, it should unfilter the list.
@@ -17,6 +16,3 @@ Decide how to display "expanded" version.
 - separate code into MVC structure wherever possible?, for readability.
 
 - note that currently you can sort then filter, but you cannot filter then sort.
-
-- sort by date added
-- sort by date read
