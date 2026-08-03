@@ -237,12 +237,26 @@ function search(query, library) {
   return filteredBooks
 }
 
-// bulk delete, working area
-
 function deleteBooks(library) {
   let newLibrary = library.filter((book) => book.selected === UNSELECTED);
   myLibrary = newLibrary;
   return myLibrary
+}
+
+function bulkMarkAsRead(library) {
+  for (book of library) {
+    if (book.selected === SELECTED) {
+      book.readStatus = READ
+    }
+  }
+}
+
+function bulkMarkAsUnread(library) {
+  for (book of library) {
+    if (book.selected === SELECTED) {
+      book.readStatus = UNREAD
+    }
+  }
 }
 
 const bulkAction = document.querySelector("#bulk-action");
@@ -252,14 +266,14 @@ bulkAction.addEventListener("change", (event) => {
       clearBookList();
       renderLibrary(deleteBooks(myLibrary))
     }
-    // else if (selectedValue === "mark-read") {
-    //   sortByYear();
-    //   clearBookList();
-    //   renderLibrary(myLibrary)
-    // }
-    // else if (selectedValue === "mark-unread") {
-    //   sortByYear();
-    //   clearBookList();
-    //   renderLibrary(myLibrary)
-    // }
+    else if (selectedValue === "mark-read") {
+      bulkMarkAsRead(myLibrary);
+      clearBookList();
+      renderLibrary(myLibrary)
+    }
+    else if (selectedValue === "mark-unread") {
+      bulkMarkAsUnread(myLibrary);
+      clearBookList();
+      renderLibrary(myLibrary)
+    }
 })
