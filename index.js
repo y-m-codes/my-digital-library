@@ -19,11 +19,11 @@ function addBook(title, author, year, pages, readStatus) {
 
 addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", READ);
 addBook("Yellowface", "RF Kuang", "2023", "500", UNREAD);
-addBook("Small Boat", "Vincent Delacroix", "2023", "700", UNREAD);
+addBook("Small Boat", "Vincent Delacroix", "2023", "700", READ);
 addBook("The Stranger", "Albert Camus", "1942", "1000", UNREAD);
-addBook("A Tale of Two Cities", "Charles Dickens", "1859", "2000", UNREAD);
+addBook("A Tale of Two Cities", "Charles Dickens", "1859", "2000", READ);
 addBook("Harry Potter and the Philosopher's Stone", "J. K. Rowling", "1997", "1300", UNREAD);
-addBook("And Then There Were None", "Agatha Christie", "1939", "1500", UNREAD);
+addBook("And Then There Were None", "Agatha Christie", "1939", "1500", READ);
 addBook("Dream of the Red Chamber", "Cao Xueqin", "1791", "10000", UNREAD);
 addBook("The Murder of Roger Ackroyd", "Agatha Christie", "1926", "800", UNREAD);
 
@@ -142,30 +142,7 @@ function deleteBook(id) {
   renderLibrary(myLibrary)
 };
 
-function sortByTitle() {
-  myLibrary.sort((a, b) => a.title.localeCompare(b.title, "en",
-    { ignorePunctuation: true }));
-};
-
-function sortByYear() {
-  myLibrary.sort((a, b) => a.year - b.year);
-}
-
-const sortBy = document.querySelector("#sort-by");
-sortBy.addEventListener("change", (event) => {
-  const selectedValue = event.target.value;
-    if (selectedValue === "title") {
-      sortByTitle();
-      clearBookList();
-      renderLibrary(myLibrary)
-    }
-    else if (selectedValue === "year") {
-      sortByYear();
-      clearBookList();
-      renderLibrary(myLibrary)
-    }
-  }
-);
+const toolbar = document.querySelector("#toolbar");
 
 const readBooks = function() {
   return myLibrary.filter((book) => book.readStatus === READ)
@@ -192,3 +169,51 @@ unreadBtn.addEventListener("click", () => {
   clearBookList();
   renderLibrary(unreadBooks())
 })
+
+function sortByTitle() {
+  myLibrary.sort((a, b) => a.title.localeCompare(b.title, "en",
+    { ignorePunctuation: true }));
+};
+
+function sortByYear() {
+  myLibrary.sort((a, b) => a.year - b.year);
+}
+
+const sortBy = document.querySelector("#sort-by");
+sortBy.addEventListener("change", (event) => {
+  const selectedValue = event.target.value;
+    if (selectedValue === "title") {
+      sortByTitle();
+      clearBookList();
+      renderLibrary(myLibrary)
+    }
+    else if (selectedValue === "year") {
+      sortByYear();
+      clearBookList();
+      renderLibrary(myLibrary)
+    }
+  }
+);
+
+// "search by author" & "title" partial match, working area
+const searchBar = document.querySelector("#site-search");
+const searchBtn = document.querySelector("#search-btn");
+
+searchBtn.addEventListener("click", () => {
+  let searchQuery = searchBar.value.toLowerCase();
+  clearBookList();
+  renderLibrary(search(searchQuery, myLibrary))
+})
+
+function search(query, library) {
+  let filteredBooks = [];
+  for (const book of library) {
+    if (book.author.toLowerCase().includes(query)) {
+      filteredBooks.push(book)
+    }
+    else if (book.title.toLowerCase().includes(query)) {
+      filteredBooks.push(book)
+    }
+  }
+  return filteredBooks
+}
