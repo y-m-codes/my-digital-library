@@ -1,31 +1,35 @@
 const myLibrary = [];
 
 const READ = "read";
-const UNREAD = "unread"
+const UNREAD = "unread";
 
-function Book(title, author, year, pages, readStatus) {
+const SELECTED = "selected";
+const UNSELECTED = "unselected";
+
+function Book(title, author, year, pages, readStatus, selected) {
   this.title = title;
   this.author = author;
   this.year = year;
   this.pages = pages;
   this.readStatus = readStatus;
+  this.selected = selected;
   this.id = crypto.randomUUID();
 }
 
-function addBook(title, author, year, pages, readStatus) {
-  let newBook = new Book(title, author, year, pages, readStatus);
+function addBook(title, author, year, pages, readStatus, selected) {
+  let newBook = new Book(title, author, year, pages, readStatus, selected);
   myLibrary.push(newBook);
 }
 
-addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", READ);
-addBook("Yellowface", "RF Kuang", "2023", "500", UNREAD);
-addBook("Small Boat", "Vincent Delacroix", "2023", "700", READ);
-addBook("The Stranger", "Albert Camus", "1942", "1000", UNREAD);
-addBook("A Tale of Two Cities", "Charles Dickens", "1859", "2000", READ);
-addBook("Harry Potter and the Philosopher's Stone", "J. K. Rowling", "1997", "1300", UNREAD);
-addBook("And Then There Were None", "Agatha Christie", "1939", "1500", READ);
-addBook("Dream of the Red Chamber", "Cao Xueqin", "1791", "10000", UNREAD);
-addBook("The Murder of Roger Ackroyd", "Agatha Christie", "1926", "800", UNREAD);
+addBook("The Little Prince", "Antoine Saint-Exupery", "1943", "100", READ, SELECTED);
+addBook("Yellowface", "RF Kuang", "2023", "500", UNREAD, SELECTED);
+addBook("Small Boat", "Vincent Delacroix", "2023", "700", READ, SELECTED);
+addBook("The Stranger", "Albert Camus", "1942", "1000", UNREAD, UNSELECTED);
+addBook("A Tale of Two Cities", "Charles Dickens", "1859", "2000", READ, UNSELECTED);
+addBook("Harry Potter and the Philosopher's Stone", "J. K. Rowling", "1997", "1300", UNREAD, UNSELECTED);
+addBook("And Then There Were None", "Agatha Christie", "1939", "1500", READ, UNSELECTED);
+addBook("Dream of the Red Chamber", "Cao Xueqin", "1791", "10000", UNREAD, UNSELECTED);
+addBook("The Murder of Roger Ackroyd", "Agatha Christie", "1926", "800", UNREAD, UNSELECTED);
 
 const bookList = document.querySelector("#book-list");
 renderLibrary(myLibrary)
@@ -61,7 +65,7 @@ function renderLibrary(library) {
     ];
 
     const dropdown = document.createElement("select");
-    dropdown.id = "read-status";
+    dropdown.name = "read-status";
 
     readStatusOptions.forEach(readSelection => {
     const option = document.createElement("option");
@@ -115,23 +119,24 @@ newBookForm.addEventListener('submit', function(event) {
   newBookForm.reset()
 });
 
+function createNewBook() {
+  const {title, author, year, pages, readStatus, selected} = getBookInfo();
+
+  let newBook = new Book(title, author, year, pages, readStatus, selected);
+  myLibrary.push(newBook);
+  clearBookList();
+  renderLibrary(myLibrary);
+}
+
 function getBookInfo() {
   let title = document.getElementById('title').value;
   let author = document.getElementById('author').value;
   let year = document.getElementById('year').value;
   let pages = document.getElementById('pages').value;
   let readStatus = document.getElementById('read-status').value;
+  let selected = UNSELECTED;
 
-  return {title: title, author: author, year: year, pages: pages, readStatus: readStatus}
-}
-
-function createNewBook() {
-  const {title, author, year, pages, readStatus} = getBookInfo();
-
-  let newBook = new Book(title, author, year, pages, readStatus);
-  myLibrary.push(newBook);
-  clearBookList();
-  renderLibrary(myLibrary);
+  return {title: title, author: author, year: year, pages: pages, readStatus: readStatus, selected: selected}
 }
 
 function deleteBook(id) {
@@ -195,7 +200,6 @@ sortBy.addEventListener("change", (event) => {
   }
 );
 
-// "search by author" & "title" partial match, working area
 const searchBar = document.querySelector("#site-search");
 const searchBtn = document.querySelector("#search-btn");
 
@@ -216,4 +220,11 @@ function search(query, library) {
     }
   }
   return filteredBooks
+}
+
+// bulk delete, working area
+
+function deleteBooks(library) {
+  let newLibrary = library.filter((book) => book.selected === UNSELECTED);
+  return newLibrary
 }

@@ -4,6 +4,8 @@ To do:
 - bulk delete
 - bulk mark as read
 
+- search bar: when you clear your search query, it should unfilter the list.
+
 - truncate long titles by default, click to expand, click to contract.
 Decide how to display "expanded" version.
 
