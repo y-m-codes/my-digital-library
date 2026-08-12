@@ -31,23 +31,26 @@ addBook("And Then There Were None", "Agatha Christie", "1939", "1500", READ, UNS
 addBook("Dream of the Red Chamber", "Cao Xueqin", "1791", "10000", UNREAD, UNSELECTED);
 addBook("The Murder of Roger Ackroyd", "Agatha Christie", "1926", "800", UNREAD, UNSELECTED);
 
-const bookList = document.querySelector("#book-list");
+const libraryDiv = document.querySelector("#library-div");
 renderLibrary(myLibrary)
 
 function clearBookList() {
-  bookList.replaceChildren()
+  libraryDiv.replaceChildren()
 }
 
 function renderLibrary(library) {
+  const bookList = document.createElement("ul");
+  bookList.id = "book-list";
+  libraryDiv.appendChild(bookList);
+
   for (const book of library) {
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book");
-    bookList.appendChild(bookDiv);
+    const bookListing = document.createElement("li");
+    bookListing.classList.add("book");
+    bookList.appendChild(bookListing);
 
     const bookTitle = document.createElement("h2");
     const subtitle = document.createElement("h3");
     subtitle.classList.add("subtitle");
-
     const bookPages = document.createElement("p");
     bookPages.classList.add("pages");
 
@@ -55,9 +58,9 @@ function renderLibrary(library) {
     subtitle.textContent = `${book.author}, ${book.year}`;
     bookPages.textContent = `${book.pages} pages`;
 
-    bookDiv.appendChild(bookTitle);
-    bookDiv.appendChild(subtitle);
-    bookDiv.appendChild(bookPages);
+    bookListing.appendChild(bookTitle);
+    bookListing.appendChild(subtitle);
+    bookListing.appendChild(bookPages);
 
     const readStatusOptions = [
       { value: UNREAD, text: "Unread" },
@@ -86,13 +89,14 @@ function renderLibrary(library) {
     }
     });
 
-    bookDiv.appendChild(dropdown);
+    bookListing.appendChild(dropdown);
 
     const deleteBookBtn = Object.assign(document.createElement('button'), {
       textContent: 'Delete',
       onclick: () => deleteBook(book.id)
     });
-    bookDiv.appendChild(deleteBookBtn);
+    deleteBookBtn.classList.add("btn")
+    bookListing.appendChild(deleteBookBtn);
 
     const checkbox = document.createElement("input");
     checkbox.type = 'checkbox';
@@ -107,7 +111,7 @@ function renderLibrary(library) {
     }
     });
 
-    bookDiv.appendChild(checkbox);
+    bookListing.appendChild(checkbox);
   }
 }
 
@@ -179,6 +183,7 @@ noFilterBtn.addEventListener("click", () => {
 })
 
 const readBtn = document.querySelector("#read-btn");
+readBtn.classList.add("btn");
 readBtn.addEventListener("click", () => {
   clearBookList();
   renderLibrary(readBooks())
